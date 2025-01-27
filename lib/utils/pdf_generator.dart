@@ -1,11 +1,13 @@
+// ignore_for_file: deprecated_member_use
+
 import 'dart:typed_data';
+
 import 'package:pdf/widgets.dart' as pw;
 import 'package:pdf/pdf.dart';
 import '../providers/resume_provider.dart';
 
 Future<Uint8List> generatePDF(ResumeState state) async {
   final pdf = pw.Document();
-
   pdf.addPage(
     pw.Page(
       margin: pw.EdgeInsets
@@ -16,86 +18,113 @@ Future<Uint8List> generatePDF(ResumeState state) async {
           pw.Container(
             width: double.infinity,
             height: double.infinity,
+
             color: PdfColor.fromInt(state.backgroundColor.value),
           ),
 
-          // Content of the Resume
           pw.Padding(
-            padding: const pw.EdgeInsets.all(24),
+            padding: pw.EdgeInsets.all(24),
             child: pw.Column(
               crossAxisAlignment: pw.CrossAxisAlignment.start,
               children: [
                 // Header Section
                 pw.Text(
-                  'John Doe',
+                  'Paras',
                   style: pw.TextStyle(
                     fontSize: state.fontSize + 4,
                     fontWeight: pw.FontWeight.bold,
+                    
                     color: PdfColor.fromInt(state.fontColor.value),
                   ),
                 ),
                 pw.SizedBox(height: 8),
                 pw.Text(
-                  'Email: john.doe@example.com | Phone: +1 234 567 8900',
+                  'FLUTTER DEVELOPER (INTERNSHIP SEEKER)',
                   style: pw.TextStyle(
-                    fontSize: state.fontSize,
-                    color: PdfColor.fromInt(state.fontColor.value),
-                  ),
-                ),
-                pw.Text(
-                  'LinkedIn: linkedin.com/in/johndoe | GitHub: github.com/johndoe',
-                  style: pw.TextStyle(
-                    fontSize: state.fontSize,
+                    fontSize: state.fontSize + 4,
+                    fontWeight: pw.FontWeight.bold,
+
                     color: PdfColor.fromInt(state.fontColor.value),
                   ),
                 ),
 
+                pw.Text(
+                  '+91 70877-73281 · paraskashyap2006@gmail.com · Chandigarh, India',
+                  style: pw.TextStyle(
+                    fontSize: state.fontSize,
+
+                    color: PdfColor.fromInt(state.fontColor.value),
+                  ),
+                ),
+                pw.SizedBox(height: 16),
+                pw.Text(
+                  'A motivated and eager-to-learncolor: PdfColor.fromInt(state.fontColor.value), Flutter developer seeking an internship opportunity to gain practical experience and enhance skills in mobile app development. Strong foundational knowledge of Flutter and Dart, with a keen interest in building cross-platform mobile applications. Adept at problem-solving, communication, and working collaboratively in a team environment. Eager to contribute to real-world projects while continuing to grow and refine technical expertise.',
+                  style: pw.TextStyle(
+
+                    color: PdfColor.fromInt(state.fontColor.value),
+                    fontSize: state.fontSize,
+                  ),
+                ),
                 pw.SizedBox(height: 16),
 
-                // Skills Section
+                // Key Competencies Section
                 pw.Text(
-                  'Skills',
+                  'KEY COMPETENCIES',
                   style: pw.TextStyle(
-                    fontSize: state.fontSize + 2,
+                    fontSize: state.fontSize,
                     fontWeight: pw.FontWeight.bold,
                     color: PdfColor.fromInt(state.fontColor.value),
                   ),
                 ),
                 pw.Bullet(
-                  text: 'Cloud Computing (AWS, Azure, GCP)',
+                  text: 'Flutter & Dart Development',
                   style: pw.TextStyle(
                     fontSize: state.fontSize,
                     color: PdfColor.fromInt(state.fontColor.value),
                   ),
                 ),
                 pw.Bullet(
-                  text: 'DevOps (Docker, Kubernetes, CI/CD Pipelines)',
+                  text: 'Mobile App Development',
                   style: pw.TextStyle(
                     fontSize: state.fontSize,
                     color: PdfColor.fromInt(state.fontColor.value),
                   ),
                 ),
                 pw.Bullet(
-                  text: 'Programming Languages (Python, Java, Go)',
+                  text: 'Problem Solving & Debugging',
                   style: pw.TextStyle(
                     fontSize: state.fontSize,
                     color: PdfColor.fromInt(state.fontColor.value),
                   ),
                 ),
-
+                pw.Bullet(
+                  text: 'Strong Communication Skills',
+                  style: pw.TextStyle(
+                    fontSize: state.fontSize,
+                    color: PdfColor.fromInt(state.fontColor.value),
+                  ),
+                ),
+                pw.Bullet(
+                  text: 'Team Collaboration & Adaptability',
+                  style: pw.TextStyle(
+                    fontSize: state.fontSize,
+                    color: PdfColor.fromInt(state.fontColor.value),
+                  ),
+                ),
+                pw.Divider(color: PdfColor.fromInt(state.fontColor.value)),
                 pw.SizedBox(height: 16),
 
                 // Education Section
                 pw.Text(
-                  'Education',
+                  'EDUCATION',
                   style: pw.TextStyle(
-                    fontSize: state.fontSize + 2,
-                    fontWeight: pw.FontWeight.bold,
                     color: PdfColor.fromInt(state.fontColor.value),
+                    fontSize: state.fontSize + 4,
+                    fontWeight: pw.FontWeight.bold,
                   ),
                 ),
                 pw.Text(
-                  'Master of Computer Science',
+                  'Bachelor of Computer Application',
                   style: pw.TextStyle(
                     fontSize: state.fontSize,
                     fontWeight: pw.FontWeight.bold,
@@ -103,7 +132,89 @@ Future<Uint8List> generatePDF(ResumeState state) async {
                   ),
                 ),
                 pw.Text(
-                  'University of Technology, 2020 - 2022',
+                  'Chandigarh University, Chandigarh, India',
+                  style: pw.TextStyle(
+                    fontSize: state.fontSize,
+                    color: PdfColor.fromInt(state.fontColor.value),
+                  ),
+                ),
+                pw.Text(
+                  'Passing Year: 2027',
+                  style: pw.TextStyle(
+                    fontSize: state.fontSize,
+                    color: PdfColor.fromInt(state.fontColor.value),
+                  ),
+                ),
+                pw.SizedBox(height: 8),
+                pw.Text(
+                  'Senior Secondary School',
+                  style: pw.TextStyle(
+                    fontSize: state.fontSize,
+                    fontWeight: pw.FontWeight.bold,
+                    color: PdfColor.fromInt(state.fontColor.value),
+                  ),
+                ),
+                pw.Text(
+                  'Government Senior Secondary School, Guru Har Sahai, Punjab',
+                  style: pw.TextStyle(
+                    fontSize: state.fontSize,
+                    color: PdfColor.fromInt(state.fontColor.value),
+                  ),
+                ),
+                pw.Text(
+                  'Passing Year: 2024 | Scored: 86%',
+                  style: pw.TextStyle(
+                    fontSize: state.fontSize,
+                    color: PdfColor.fromInt(state.fontColor.value),
+                  ),
+                ),
+                pw.SizedBox(height: 8),
+                pw.Text(
+                  'Higher Secondary School',
+                  style: pw.TextStyle(
+                    fontSize: state.fontSize,
+                    fontWeight: pw.FontWeight.bold,
+                    color: PdfColor.fromInt(state.fontColor.value),
+                  ),
+                ),
+                pw.Text(
+                  'Government Senior Secondary School, Guru Har Sahai, Punjab',
+                  style: pw.TextStyle(
+                    fontSize: state.fontSize,
+                    color: PdfColor.fromInt(state.fontColor.value),
+                  ),
+                ),
+                pw.Text(
+                  'Passing Year: 2023 | Scored: 84%',
+                  style: pw.TextStyle(
+                    fontSize: state.fontSize,
+                    color: PdfColor.fromInt(state.fontColor.value),
+                  ),
+                ),
+                pw.Divider(color: PdfColor.fromInt(state.fontColor.value)),
+                pw.SizedBox(height: 16),
+
+                // Personal Details Section
+                pw.Text(
+                  'PERSONAL DETAILS',
+                  style: pw.TextStyle(
+                    color: PdfColor.fromInt(state.fontColor.value),
+                    fontSize: 14,
+                    fontWeight: pw.FontWeight.bold,
+                  ),
+                ),
+                pw.SizedBox(height: 3),
+                pw.Text(
+                  'Date of Birth: 04.10.2006',
+                  style: pw.TextStyle(
+                    fontSize: state.fontSize,
+                    color: PdfColor.fromInt(state.fontColor.value),
+                  ),
+                ),
+                pw.SizedBox(height: 4),
+
+                pw.Text(
+                  'Eligible to Work in: India',
                   style: pw.TextStyle(
                     fontSize: state.fontSize,
                     color: PdfColor.fromInt(state.fontColor.value),
@@ -111,62 +222,79 @@ Future<Uint8List> generatePDF(ResumeState state) async {
                 ),
                 pw.SizedBox(height: 4),
                 pw.Text(
-                  'Relevant Courses: Cloud Infrastructure, Distributed Systems, Data Security',
+                  'Total Years of Experience: 0',
                   style: pw.TextStyle(
                     fontSize: state.fontSize,
                     color: PdfColor.fromInt(state.fontColor.value),
                   ),
                 ),
-
+                pw.Divider(color: PdfColor.fromInt(state.fontColor.value)),
                 pw.SizedBox(height: 16),
-
-                // Work Experience Section
                 pw.Text(
-                  'Work Experience',
-                  style: pw.TextStyle(
-                    fontSize: state.fontSize + 2,
-                    fontWeight: pw.FontWeight.bold,
-                    color: PdfColor.fromInt(state.fontColor.value),
-                  ),
-                ),
-                pw.Text(
-                  'Cloud Engineer - Tech Solutions Inc.',
+                  'Skills / IT Skills',
                   style: pw.TextStyle(
                     fontSize: state.fontSize,
                     fontWeight: pw.FontWeight.bold,
                     color: PdfColor.fromInt(state.fontColor.value),
                   ),
                 ),
-                pw.Text(
-                  '2022 - Present',
+                pw.Bullet(
+                  text: 'Problem Solving',
                   style: pw.TextStyle(
                     fontSize: state.fontSize,
                     color: PdfColor.fromInt(state.fontColor.value),
                   ),
                 ),
                 pw.Bullet(
-                  text:
-                      'Designed and deployed scalable AWS architectures for enterprise clients.',
+                  text: 'Strong Communication Skills',
                   style: pw.TextStyle(
                     fontSize: state.fontSize,
                     color: PdfColor.fromInt(state.fontColor.value),
                   ),
                 ),
                 pw.Bullet(
-                  text: 'Implemented CI/CD pipelines using Jenkins and GitLab.',
+                  text: 'Dart',
                   style: pw.TextStyle(
                     fontSize: state.fontSize,
                     color: PdfColor.fromInt(state.fontColor.value),
                   ),
                 ),
                 pw.Bullet(
-                  text:
-                      'Migrated legacy systems to cloud-based infrastructure.',
+                  text: 'Critical Thinking',
                   style: pw.TextStyle(
                     fontSize: state.fontSize,
                     color: PdfColor.fromInt(state.fontColor.value),
                   ),
                 ),
+                pw.Bullet(
+                  text: 'Team Collaboration & Adaptability',
+                  style: pw.TextStyle(
+                    fontSize: state.fontSize,
+                    color: PdfColor.fromInt(state.fontColor.value),
+                  ),
+                ),
+                pw.Bullet(
+                  text: 'Flutter Development',
+                  style: pw.TextStyle(
+                    fontSize: state.fontSize,
+                    color: PdfColor.fromInt(state.fontColor.value),
+                  ),
+                ),
+                pw.Bullet(
+                  text: 'Microsoft Office',
+                  style: pw.TextStyle(
+                    fontSize: state.fontSize,
+                    color: PdfColor.fromInt(state.fontColor.value),
+                  ),
+                ),
+                pw.Bullet(
+                  text: 'Creativity',
+                  style: pw.TextStyle(
+                    fontSize: state.fontSize,
+                    color: PdfColor.fromInt(state.fontColor.value),
+                  ),
+                ),
+                pw.SizedBox(height: 8)
               ],
             ),
           ),

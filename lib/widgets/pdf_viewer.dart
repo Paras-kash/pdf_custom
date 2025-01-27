@@ -4,6 +4,8 @@ import '../providers/resume_provider.dart';
 import 'package:printing/printing.dart';
 
 class PDFViewer extends ConsumerWidget {
+  const PDFViewer({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final pdfDocument = ref.watch(pdfProvider);
