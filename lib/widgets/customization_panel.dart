@@ -3,98 +3,147 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../providers/resume_provider.dart';
 
-class CustomizationPanel extends ConsumerWidget {
+class CustomizationPanel extends ConsumerStatefulWidget {
   const CustomizationPanel({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  // ignore: library_private_types_in_public_api
+  _CustomizationPanelState createState() => _CustomizationPanelState();
+}
+
+class _CustomizationPanelState extends ConsumerState<CustomizationPanel> {
+  bool _isMinimized = false; // State to track panel visibility
+
+  @override
+  Widget build(BuildContext context) {
     final resumeState = ref.watch(resumeProvider);
     final notifier = ref.read(resumeProvider.notifier);
 
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.grey[100],
-        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black26,
-            blurRadius: 4,
-            offset: Offset(0, -2),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+    return SafeArea(
+      child: Stack(
+        alignment: Alignment.bottomCenter,
         children: [
-          Text(
-            "Customize Your Resume",
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.blueGrey[900],
+          // Customization Panel
+          AnimatedContainer(
+            duration: Duration(milliseconds: 300),
+            height: _isMinimized ? 50 : 300, // Adjust height based on state
+            padding: EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.grey[100],
+              borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black26,
+                  blurRadius: 4,
+                  offset: Offset(0, -2),
                 ),
-          ),
-          const SizedBox(height: 16),
-
-          // Customization Options Group
-          Card(
-            elevation: 2,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
+              ],
             ),
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                children: [
-                  // Font Size Slider
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Font Size",
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            "${resumeState.fontSize.toInt()}",
-                            style: Theme.of(context).textTheme.titleMedium,
+            child: _isMinimized
+                ? Center(
+                    child: Text(
+                      "Expand to Customize",
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                  )
+                : SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Customize Your Resume",
+                          style:
+                              Theme.of(context).textTheme.titleLarge?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.blueGrey[900],
+                                  ),
+                        ),
+                        const SizedBox(height: 16),
+
+                        // Customization Options
+                        Card(
+                          elevation: 2,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
                           ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  Slider(
-                    value: resumeState.fontSize,
-                    min: 10,
-                    max: 30,
-                    divisions: 20,
-                    label: resumeState.fontSize.toInt().toString(),
-                    onChanged: (newFontSize) {
-                      notifier.updateFontSize(newFontSize);
-                    },
-                  ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(16),
+                            child: Column(
+                              children: [
+                                // Font Size Slider
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Font Size",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleMedium,
+                                    ),
+                                    Slider(
+                                      value: resumeState.fontSize,
+                                      min: 5,
+                                      max: 30,
+                                      divisions: 20,
+                                      label: "${resumeState.fontSize.toInt()}",
+                                      onChanged: (newValue) {
+                                        notifier.updateFontSize(newValue);
+                                      },
+                                    ),
+                                    Text(
+                                      "${resumeState.fontSize.toInt()} pt",
+                                      style:
+                                          Theme.of(context).textTheme.bodySmall,
+                                    ),
+                                  ],
+                                ),
 
-                  const Divider(),
+                                const Divider(),
 
-                  // Font Color Picker
-                  _colorPickerRow(
-                    context,
-                    title: "Font Color",
-                    currentColor: resumeState.fontColor,
-                    onColorSelected: notifier.updateFontColor,
+                                // Font Color Picker
+                                _colorPickerRow(
+                                  context,
+                                  title: "Font Color",
+                                  currentColor: resumeState.fontColor,
+                                  onColorSelected: notifier.updateFontColor,
+                                ),
+
+                                const Divider(),
+
+                                // Background Color Picker
+                                _colorPickerRow(
+                                  context,
+                                  title: "Background Color",
+                                  currentColor: resumeState.backgroundColor,
+                                  onColorSelected:
+                                      notifier.updateBackgroundColor,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
+          ),
 
-                  const Divider(),
-
-                  // Background Color Picker
-                  _colorPickerRow(
-                    context,
-                    title: "Background Color",
-                    currentColor: resumeState.backgroundColor,
-                    onColorSelected: notifier.updateBackgroundColor,
-                  ),
-                ],
+          // Toggle Button (Always Visible at Top-Right)
+          Positioned(
+            top: 16,
+            right: 16,
+            child: FloatingActionButton(
+              mini: true,
+              backgroundColor: Colors.blueGrey[900],
+              onPressed: () {
+                setState(() {
+                  _isMinimized = !_isMinimized; // Toggle panel state
+                });
+              },
+              child: Icon(
+                _isMinimized
+                    ? Icons.keyboard_arrow_up
+                    : Icons.keyboard_arrow_down,
+                color: Colors.white,
               ),
             ),
           ),
