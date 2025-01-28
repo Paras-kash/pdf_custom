@@ -18,7 +18,6 @@ Future<Uint8List> generatePDF(ResumeState state) async {
           pw.Container(
             width: double.infinity,
             height: double.infinity,
-
             color: PdfColor.fromInt(state.backgroundColor.value),
           ),
 
@@ -33,7 +32,6 @@ Future<Uint8List> generatePDF(ResumeState state) async {
                   style: pw.TextStyle(
                     fontSize: state.fontSize + 4,
                     fontWeight: pw.FontWeight.bold,
-                    
                     color: PdfColor.fromInt(state.fontColor.value),
                   ),
                 ),
@@ -43,7 +41,6 @@ Future<Uint8List> generatePDF(ResumeState state) async {
                   style: pw.TextStyle(
                     fontSize: state.fontSize + 4,
                     fontWeight: pw.FontWeight.bold,
-
                     color: PdfColor.fromInt(state.fontColor.value),
                   ),
                 ),
@@ -52,15 +49,13 @@ Future<Uint8List> generatePDF(ResumeState state) async {
                   '+91 70877-73281 · paraskashyap2006@gmail.com · Chandigarh, India',
                   style: pw.TextStyle(
                     fontSize: state.fontSize,
-
                     color: PdfColor.fromInt(state.fontColor.value),
                   ),
                 ),
                 pw.SizedBox(height: 16),
                 pw.Text(
-                  'A motivated and eager-to-learncolor: PdfColor.fromInt(state.fontColor.value), Flutter developer seeking an internship opportunity to gain practical experience and enhance skills in mobile app development. Strong foundational knowledge of Flutter and Dart, with a keen interest in building cross-platform mobile applications. Adept at problem-solving, communication, and working collaboratively in a team environment. Eager to contribute to real-world projects while continuing to grow and refine technical expertise.',
+                  'A motivated and eager-to-learn Flutter developer seeking an internship opportunity to gain practical experience and enhance skills in mobile app development. Strong foundational knowledge of Flutter and Dart, with a keen interest in building cross-platform mobile applications. Adept at problem-solving, communication, and working collaboratively in a team environment. Eager to contribute to real-world projects while continuing to grow and refine technical expertise.',
                   style: pw.TextStyle(
-
                     color: PdfColor.fromInt(state.fontColor.value),
                     fontSize: state.fontSize,
                   ),
